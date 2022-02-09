@@ -14,4 +14,28 @@ Experimental models of gene products typically assume some degree of independenc
 Functional enrichment analysis is a powerful computational tool that leverages our entire molecular knowledge to provide important insight into the system-level implication of an experimentally-derived gene list. This project is to provide an easy interface for researchers to explore thier data without having to manage their inputs, outputs, or organization.
 
 ## How?
+### 1. Initialize Genes() object
+```
+genes = Genes('project name')
+```
+### 2. Get genes
+```
+genes.setGenes('path/to/genes.csv')
+```
+### 3. Analyze
+Currently, this software provides:
+```
+Genes().getHGNC()     # update self.genes with approved gene nomenclature
+Genes().getEA()       # performs and stores EA in self.enrich
+Genes().setEA()       # read stored EA CSV into self.enrich 
+```
+### Dependencies
+- PyArrow
+- feather (R)
 
+## Future attributes to be added
+- Semantic similarity analysis
+- Semantic reduction
+- Class with visualization methods
+- Save states for easy re-loading
+- More species
