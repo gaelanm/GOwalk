@@ -1,8 +1,8 @@
-# **Nexus-EA**
+# **UtilitEA for functional enrichment analysis**
 A simple tool to enhance the quality of life for researchers studying interesting gene lists. 
 
 ## What?
-Nexus-EA is a container that provides easy access to various bioinformatics tools and visualizations for functional enrichment analysis in a single session.
+A simple tool to enhance the quality of life for researchers studying interesting gene lists. UtilitEA provides easy access to various bioinformatics and visualizations libraries for functional enrichment analysis.
 
 ## Why?
 
