@@ -12,9 +12,7 @@ Experimental models of gene products typically assume some degree of independenc
 
 Functional enrichment analysis is a powerful computational tool that leverages our entire molecular knowledge to provide important insight into the system-level implication of an experimentally-derived gene list. This project is to provide an easy interface for researchers to explore thier data without having to manage their inputs, outputs, or organization.
 
-***UtilitEA provides some cross-compatibility with R's bioconductor***
-
-This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
+***UtilitEA provides some cross-compatibility with R's bioconductor*** ---- This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
 
 ## How do I use it?
 ### 1. Initialize Genes() object
