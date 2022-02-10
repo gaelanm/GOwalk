@@ -1,10 +1,9 @@
 # **UtilitEA for functional enrichment analysis**
-A simple tool to enhance the quality of life for researchers studying interesting gene lists. 
 
-## What?
+## What is this?
 A simple tool to enhance the quality of life for researchers studying interesting gene lists. UtilitEA provides easy access to various bioinformatics and visualizations libraries for functional enrichment analysis.
 
-## Why?
+## Why make it?
 
 > Whereas reductionism has yielded splendid results in science, there is an important sense in which it is artificial, and in this sense false. By starting from wholes and moving ‘down’ into parts, one is moving in the opposite direction from the way matters arise.
 *Ursula Goodenough*, [*The Sacred Emergence of Nature*](https://openscholarship.wustl.edu/cgi/viewcontent.cgi?article=1066&context=bio_facpubs)
@@ -16,7 +15,7 @@ Functional enrichment analysis is a powerful computational tool that leverages o
 ***Nexus-EA provides some cross-compatibility with R's bioconductor***
 This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
 
-## How?
+## How do I use it?
 ### 1. Initialize Genes() object
 ```
 genes = Genes('project name')
