@@ -22,7 +22,7 @@ class UtilitEA(enrichment):
         """
         self.name = None
         self.file = file
-        self.genes = None
+        self.genes = self.readGenes()
 
 
     def readGenes(self):
@@ -31,12 +31,14 @@ class UtilitEA(enrichment):
         :param path: full path to csv
         :return: self.gene attribute
         """
-        self.genes = pd.read_csv(self.file, header=0)
+        geneList = pd.read_csv(self.file, header=0)
 
         # feather format for passing data to Rscripts
-        self.genes.to_feather(
+        geneList.to_feather(
             f'projects/{self.name}/featherFiles/genes.feather'
         )
+
+        return geneList
 
     def check(self, this):
         """
