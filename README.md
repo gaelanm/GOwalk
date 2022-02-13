@@ -39,8 +39,8 @@ geneset.getGO(geneset.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', thresh
 
 ## Future attributes to be added
 - Shell compatibility
-- Semantic similarity analysis
-- Semantic reduction
+- ~Semantic similarity analysis~
+- ~Semantic reduction~
 - Class with visualization methods
 - Save states for easy re-loading
 - More species
