@@ -8,11 +8,12 @@ f <- arrow::read_feather(
 
 # https://biit.cs.ut.ee/gprofiler/page/docs
 res <- gprofiler2::gost(
-    as.list(f),
+    as.list(f[1]),
         correction_method='gSCS',
             user_threshold=0.05,
                 organism='hsapiens',
-                    domain_scope='annotated')
+                    domain_scope='annotated',
+                        significant=TRUE)
 
 # added to avoid parent as list error
 res <- apply(res$result,
@@ -22,6 +23,10 @@ res <- apply(res$result,
 
 # saved as csv for long-term storage of results
 write.csv(res, glue::glue('projects/{args[1]}/data/gProfiler.csv'))
+
+
+
+
 
 
 
