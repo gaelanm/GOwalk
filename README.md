@@ -15,21 +15,24 @@ A simple tool to enhance the quality of life for researchers studying interestin
 ***I write the code so you don't have to.***
 
 ## How do I use it?
-### 1. Initialize Genes() object
+### 1. Initialize UtilitEA() object with gene list
 ```
-genes = Genes('project name')
+geneset = UtilitEA('test.csv')
+geneset.name = 'test'
 ```
-### 2. Get genes
+### 2. Automatic project directory created
 ```
-genes.setGenes('path/to/genes.csv')
+if not os.path.exists(f'projects/{proj}/featherFiles/'):
+    os.makedirs(f'projects/{proj}/featherFiles/')
+if not os.path.exists(f'projects/{proj}/data'):
+    os.makedirs(f'projects/{proj}/data')
 ```
 ### 3. Analyze
-Currently, this software provides:
 ```
-Genes().getHGNC()     # update self.genes with approved gene nomenclature
-Genes().getEA()       # performs and stores EA in self.enrich
-Genes().setEA()       # read stored EA CSV into self.enrich 
+geneset.getEA(geneset.name)
+geneset.getGO(geneset.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', threshold=0.7)
 ```
+- Semantic similarity and reduced GO terms are saved as CSVs for visualization
 ### Dependencies
 - PyArrow
 - feather (R)
