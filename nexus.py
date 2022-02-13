@@ -8,78 +8,69 @@
 import pandas as pd
 import subprocess
 import os
-import utl
+import utiliti
+from enrich import enrichment
 
-class Genes:
-    def __init__(self, name):
+
+class UtilitEA(enrichment):
+
+    def __init__(self, file):
         """
         :param name: user-defined project name
         :param self.genes: holds CSV of genes
         :param self.enrich: holds EA performed using gprofiler2 in R
         """
-        self.name = name
+        self.name = None
+        self.file = file
         self.genes = None
-        self.enrich = None
 
-    def setGenes(self, path):
+
+    def readGenes(self):
         """
         Reads user gene list into a Genes() object
         :param path: full path to csv
         :return: self.gene attribute
         """
-        self.genes = utl.Genes(path)
+        self.genes = pd.read_csv(self.file, header=0)
 
+        # feather format for passing data to Rscripts
         self.genes.to_feather(
             f'projects/{self.name}/featherFiles/genes.feather'
         )
 
-    def getHGNC(self):
+    def check(self, this):
         """
-        Data cleaning to remove erroneous gene names
+        Pseudo-methods for quick pre-processing
         :return: updates self.gene with HGNC-approved symbols
         """
-        utl.HGNC(
-            self.genes,
-                self.name
-        )
+        if this == 'HGNC':
+            utiliti.HGNC(
+                self.genes,
+                    self.name
+            )
 
-        self.genes = pd.read_feather(
-            f'projects/{self.name}/featherFiles/genes.feather'
-        )
-
-    def getEA(self):
-        """
-        Performs EA using gprofiler2 in R
-        :return: enrichment analysis of self.genes
-        """
-
-        subprocess.call(
-            ['R/clusterProfiler.R',
-                self.name]
-        )
-
-        self.enrich = pd.read_csv(
-            f'projects/{self.name}/data/gProfiler.csv'
-        )
-
-    def setEA(self, path):
-        """
-        Used to read previous EA file into self.enrich
-        :param path: full path to csv
-        :return: read EA into self.enrich
-        """
-        self.enrich = pd.read_csv(path, header=True)
+            self.genes = pd.read_feather(
+                f'projects/{self.name}/featherFiles/genes.feather'
+            )
 
 
 file = str(input('Full path to gene list: '))
-name = str(input('Project name: '))
-z = Genes(name)
+proj = str(input('Project name: '))
 
-#   create parent and children directories
-if not os.path.exists(f'projects/{name}/featherFiles/'):
-    os.makedirs(f'projects/{name}/featherFiles/')
-if not os.path.exists(f'projects/{name}/data'):
-    os.makedirs(f'projects/{name}/data')
+#   empty object
+z = UtilitEA(file)
+z.name = proj
+
+#   automatic directories
+if not os.path.exists(f'projects/{proj}/featherFiles/'):
+    os.makedirs(f'projects/{proj}/featherFiles/')
+if not os.path.exists(f'projects/{proj}/data'):
+    os.makedirs(f'projects/{proj}/data')
+
+#   test
+z.readGenes()
+z.getEA(z.name)
+z.getGO(z.name, 'BP', 'org.Hs.eg.db', 'Rel', 0.7)
 
 
 
