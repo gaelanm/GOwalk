@@ -9,18 +9,10 @@ import pandas as pd
 import subprocess
 import os
 import utiliti
-from enrich import enrichment
-
-import pandas as pd
-import subprocess
-import os
-import utiliti
-from enrich import enrichment
-
 
 class UtilitEA:
 
-    def __init__(self, file):
+    def __init__(self, file, name):
         """
         :param self.name: user-defined project name
         :param self.file: gene list path
@@ -31,7 +23,7 @@ class UtilitEA:
         :param self.threshold: semantic similarity cut-off
         :param self.method: semsim algorithm
         """
-        self.name = None
+        self.name = name
         self.file = file
         self.genes = self.readGenes()
         self.GO = None
@@ -62,7 +54,7 @@ class UtilitEA:
              self.name]
         )
 
-    def GOsr(self, orgdb, ont, method, threshold):
+    def SR(self, orgdb, ont, method, threshold):
         """
         Performs semantic similarity and parent term reduction.
         """
@@ -99,16 +91,14 @@ class UtilitEA:
 
 
 file = str(input('Full path to gene list: '))
-proj = str(input('Project name: '))
-obj = UtilitEA()
-obj.name = proj
+name = str(input('Project name: '))
+obj = UtilitEA(file, name)
 
 #   automatic directories
-if not os.path.exists(f'projects/{proj}/featherFiles/'):
-    os.makedirs(f'projects/{proj}/featherFiles/')
-if not os.path.exists(f'projects/{proj}/data'):
-    os.makedirs(f'projects/{proj}/data')
+if not os.path.exists(f'projects/{name}/featherFiles/'):
+    os.makedirs(f'projects/{name}/featherFiles/')
+if not os.path.exists(f'projects/{name}/data'):
+    os.makedirs(f'projects/{name}/data')
 
-obj.readGenes()
-obj.EA(obj.name)
-obj.GOsr('org.Hs.eg.db', 'BP', 'Rel', 0.7)
+obj.EA()
+obj.SR('org.Hs.eg.db', 'BP', 'Rel', 0.7)
