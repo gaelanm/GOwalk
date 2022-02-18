@@ -17,20 +17,22 @@ A simple tool to enhance the quality of life for researchers studying interestin
 ## How do I use it?
 ### 1. Initialize UtilitEA() object with gene list
 ```
-geneset = UtilitEA('test.csv')
-geneset.name = 'test'
+name = 'project_name'
+file = 'path_to_genes.csv'
+
+GO = UtilitEA(file, name)   # creates project and stores gene list in self.genes
 ```
 ### 2. Automatic project directory created
 ```
-if not os.path.exists(f'projects/{proj}/featherFiles/'):
-    os.makedirs(f'projects/{proj}/featherFiles/')
-if not os.path.exists(f'projects/{proj}/data'):
-    os.makedirs(f'projects/{proj}/data')
+if not os.path.exists(f'projects/{name}/featherFiles/'):
+    os.makedirs(f'projects/{name}/featherFiles/')
+if not os.path.exists(f'projects/{name}/data'):
+    os.makedirs(f'projects/{name}/data')
 ```
-### 3. Analyze
+### 3. Perform enrichment analysis
 ```
-geneset.getEA(geneset.name)
-geneset.getGO(geneset.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', threshold=0.7)
+GO.EA() # automatic EA
+GO.SR(GO.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', threshold=0.7)
 ```
 - Semantic similarity and reduced GO terms are saved as CSVs for visualization
 ### Dependencies
