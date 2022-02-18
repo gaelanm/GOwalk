@@ -11,25 +11,38 @@ import os
 import utiliti
 from enrich import enrichment
 
+import pandas as pd
+import subprocess
+import os
+import utiliti
+from enrich import enrichment
 
-class UtilitEA(enrichment):
+
+class UtilitEA:
 
     def __init__(self, file):
         """
-        :param name: user-defined project name
-        :param self.genes: holds CSV of genes
-        :param self.enrich: holds EA performed using gprofiler2 in R
+        :param self.name: user-defined project name
+        :param self.file: gene list path
+        :param self.genes: holds gene list
+        :param self.GO: GO terms
+        :param self.ont: BP, MF, or CC
+        :param self.orgdb: org.Hs.eg.db
+        :param self.threshold: semantic similarity cut-off
+        :param self.method: semsim algorithm
         """
         self.name = None
         self.file = file
         self.genes = self.readGenes()
-
+        self.GO = None
+        self.ont = None
+        self.orgdb = None
+        self.threshold = 0
+        self.method = None
 
     def readGenes(self):
         """
-        Reads user gene list into a Genes() object
-        :param path: full path to csv
-        :return: self.gene attribute
+        Imports user's gene list
         """
         geneList = pd.read_csv(self.file, header=0)
 
@@ -40,10 +53,39 @@ class UtilitEA(enrichment):
 
         return geneList
 
+    def EA(self):
+        """
+        Performs EA using gprofiler2
+        """
+        subprocess.call(
+            ['R/gProfilerEA.R',
+             self.name]
+        )
+
+    def GOsr(self, orgdb, ont, method, threshold):
+        """
+        Performs semantic similarity and parent term reduction.
+        """
+        f = pd.read_feather(f'projects/{self.name}/data/gProfiler.feather')
+
+        self.GO = f[f['source'] == f'GO:{self.ont}'].reset_index()
+        self.GO.to_feather(
+            f'projects/{self.name}/featherFiles/GO{self.ont}.feather'
+        )
+
+        subprocess.call(
+            ['R/RRVGO.R',
+             self.name,
+             orgdb,
+             ont,
+             method,
+             str(threshold)
+             ]
+        )
+
     def check(self, this):
         """
         Pseudo-methods for quick pre-processing
-        :return: updates self.gene with HGNC-approved symbols
         """
         if this == 'HGNC':
             utiliti.HGNC(
@@ -58,10 +100,8 @@ class UtilitEA(enrichment):
 
 file = str(input('Full path to gene list: '))
 proj = str(input('Project name: '))
-
-#   empty object
-z = UtilitEA(file)
-z.name = proj
+obj = UtilitEA()
+obj.name = proj
 
 #   automatic directories
 if not os.path.exists(f'projects/{proj}/featherFiles/'):
@@ -69,12 +109,6 @@ if not os.path.exists(f'projects/{proj}/featherFiles/'):
 if not os.path.exists(f'projects/{proj}/data'):
     os.makedirs(f'projects/{proj}/data')
 
-#   test
-z.readGenes()
-z.getEA(z.name)
-z.getGO(z.name, 'BP', 'org.Hs.eg.db', 'Rel', 0.7)
-
-
-
-
-
+obj.readGenes()
+obj.EA(obj.name)
+obj.GOsr('org.Hs.eg.db', 'BP', 'Rel', 0.7)
