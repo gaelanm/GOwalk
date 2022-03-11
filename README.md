@@ -12,8 +12,6 @@ A simple tool to enhance the quality of life for researchers studying interestin
 
 ***UtilitEA provides some cross-compatibility with R's bioconductor:*** This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
 
-***I write the code so you don't have to.***
-
 ## How do I use it?
 ### 1. Initialize UtilitEA() object with gene list
 ```
@@ -40,6 +38,7 @@ GO.SR(GO.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', threshold=0.7)
 - feather (R)
 
 ## Future attributes to be added
+- Notebook format
 - Shell compatibility
 - ~Semantic similarity analysis~
 - ~Semantic reduction~
