@@ -36,6 +36,8 @@ data.sub_network    # dict of spectral clusters as cluster:gene sublist pairs
 ```
 data.get_gprofiler()    # stores enrichment data from gprofiler as data.enrichment
 data.get_semantics()    # returns a similarity matrix (sem_sim) and semantically reduced df (sem_red)
+
+data.enrichment
 data.sem_sim
 data.sem_red
 ```
