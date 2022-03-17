@@ -15,6 +15,8 @@ A simple tool to enhance the quality of life for researchers studying interestin
 ## How do I use it?
 ### 1. Initialize Enrichment() object with a project name and gene list
 ```
+from enrich import *
+
 name = 'project_name'
 file = 'path_to_genes.csv'
 
