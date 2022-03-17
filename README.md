@@ -13,29 +13,34 @@ A simple tool to enhance the quality of life for researchers studying interestin
 ***UtilitEA provides some cross-compatibility with R's bioconductor:*** This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
 
 ## How do I use it?
-### 1. Initialize UtilitEA() object with gene list
+### 1. Initialize Enrichment() object with a project name and gene list
 ```
 name = 'project_name'
 file = 'path_to_genes.csv'
 
-GO = UtilitEA(file, name)   # creates project and stores gene list in self.genes
+data = Enrichment(name, file)   # automatically creates project directory
 ```
-### 2. Automatic project directory created
+### 2. Navigating your genes
+Once the object is initialized, you can view various attributes such as:
 ```
-if not os.path.exists(f'projects/{name}/featherFiles/'):
-    os.makedirs(f'projects/{name}/featherFiles/')
-if not os.path.exists(f'projects/{name}/data'):
-    os.makedirs(f'projects/{name}/data')
+data.name   # project name
+data.genes  # straight forward
+data.pairwise   # PPIs from STRINGdb
+data.network    # networkx representation
+data.sub_network    # dict of spectral clusters as cluster:gene sublist pairs
+
 ```
-### 3. Perform enrichment analysis
+### 3. Performing enrichment analysis
 ```
-GO.EA() # automatic EA
-GO.SR(GO.name, ont='BP', orgdb='org.Hs.eg.db', method='Rel', threshold=0.7)
+data.get_gprofiler()    # stores enrichment data from gprofiler as data.enrichment
+data.get_semantics()    # returns a similarity matrix (sem_sim) and semantically reduced df (sem_red)
+data.sem_sim
+data.sem_red
 ```
-- Semantic similarity and reduced GO terms are saved as CSVs for visualization
+### 4. Visualizing the data
+In progress
+
 ### Dependencies
-- PyArrow
-- feather (R)
 
 ## Future attributes to be added
 - Notebook format
