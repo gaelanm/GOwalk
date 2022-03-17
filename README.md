@@ -30,7 +30,6 @@ data.genes  # straight forward
 data.pairwise   # PPIs from STRINGdb
 data.network    # networkx representation
 data.sub_network    # dict of spectral clusters as cluster:gene sublist pairs
-
 ```
 ### 3. Performing enrichment analysis
 ```
