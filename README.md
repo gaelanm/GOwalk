@@ -1,4 +1,4 @@
-# **UtilitEA for functional enrichment analysis**
+# **for functional enrichment analysis**
 
 ## What is this?
 A simple tool to enhance the quality of life for researchers studying interesting gene lists. UtilitEA provides easy access to various bioinformatics and visualizations libraries for functional enrichment analysis.
@@ -10,7 +10,7 @@ A simple tool to enhance the quality of life for researchers studying interestin
 
 ***Access to higher dimensional insights:*** machine-readable ontologies are used to identify interesting patterns and associations among your genes.
 
-***UtilitEA provides some cross-compatibility with R's bioconductor:*** This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
+***Emergene provides some cross-compatibility with R's bioconductor:*** This work is heavily influenced by tools such as GoSemSim, RRVGO, and g:Profiler.
 
 ## How do I use it?
 ### 1. Initialize Enrichment() object with a project name and gene list
