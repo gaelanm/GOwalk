@@ -1,7 +1,8 @@
-# **for functional enrichment analysis**
 
-## What is this?
-A simple tool to enhance the quality of life for researchers studying interesting gene lists. UtilitEA provides easy access to various bioinformatics and visualizations libraries for functional enrichment analysis.
+
+## GOwalk is a personal project influenced by GeneWalk (https://churchman.med.harvard.edu/genewalk).
+
+It constructs a gene interaction network connected to the Gene Ontology Consortium, learning key biological networks and their relative cellular effects.
 
 ## Why make it?
 
