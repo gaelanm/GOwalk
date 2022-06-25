@@ -2,7 +2,9 @@
 
 ## GOwalk is a personal project influenced by GeneWalk <sup>https://churchman.med.harvard.edu/genewalk</sup>
 
-It constructs a gene interaction network connected to the Gene Ontology Consortium, learning key biological networks and their relative cellular effects.
+It constructs a gene interaction network connected to the Gene Ontology Consortium, learning key genetic subnetworks and predicts their associated functions. GOwalk similarly explores the different functional guilds of an interesting gene list and relates the biological pathways altered by the experimental hypothesis.
+
+subpopulations gene lists generated in high-throughput experiments. 
 
 ## Why make it?
 
