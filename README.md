@@ -3,6 +3,7 @@
 ## GOwalk is a personal project influenced by GeneWalk <sup>https://churchman.med.harvard.edu/genewalk</sup>
 
 This version constructs a PPI of gene products modified by the ubiquitin-like interferon-stimulated gene 15 (ISG15) connected to the associated enriched GO-terms acyclic graph using NetworkX.
+
 GOwalk receives published proteomic data sets and performs random walks using node2vec generating latent representations of how each gene in the list relates to one another, and to their overall function.
 
 The goal is to provide contextual insights for high-throughput data, offering important descriptions that help guide decision-making in research.
